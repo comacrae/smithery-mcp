@@ -2,17 +2,20 @@
 startCommand:
   type: stdio
   configSchema:
-    # JSON Schema defining the configuration options for the MCP.
-    {}
-  commandFunction:
-    # A function that produces the CLI command to start the MCP on stdio.
-    |-
+    type: object
+    properties:
+      apiKey:
+        type: string
+        description: "Your Novu API key"
+    required: ["apiKey"]
+  commandFunction: |
     (config) => ({
       "command": "node",
       "args": [
         "dist/index.js"
       ],
       "env": {
-        ...
+        "NODE_ENV": "production",
+        "NOVU_API_KEY": config.apiKey
       }
     })
