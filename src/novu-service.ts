@@ -32,12 +32,12 @@ export class NovuService {
             lastName: params.lastName,
             phone: params.phone,
             avatar: params.avatar,
-            data: {},
+            data: params.data || {},
           };
 
           return {
             success: true,
-            data: await this.novu.subscribers.create(subscriber),
+            data: await this.novu.subscribers.create(subscriber as any),
           };
 
         case "delete_subscriber":
